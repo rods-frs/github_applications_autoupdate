@@ -2,15 +2,26 @@
 from github import Github
 import subprocess
 from pathlib import Path
+import platform
 
 #pre-run config
 g = Github()
 downloads = Path.home() / "Downloads"
 golden_list = ["rpm", "64"]
+info = platform.freedesktop_os_release()
 
 #global variables
 repo_list = []
 repo_list_name = "repo_list.txt"
+install_commands = {
+    "ubuntu": "apt-get",
+    "debian": "apt-get",
+    "fedora": "dnf",
+    "arch": "pacman -S"
+}
+current_distro = info['ID']
+install_command = install_commands[current_distro]
+print(install_command)
 
 #functions
 def read_repo_list():
@@ -60,7 +71,7 @@ def install_packages():
                     package = asset.name
 
             subprocess.run(["/usr/bin/gh", "release", "download", release.tag_name, "--repo", repo_name, "--pattern", package, "--dir", downloads, "--skip-existing"])
-            subprocess.run(["sudo", "dnf", "install", f"{downloads}/{package}"])
+            subprocess.run(["sudo", install_command, "install", f"{downloads}/{package}"])
 
         except Exception as e:
             print(f"Error while installing the program from the repo {repo_name}: {e}")
