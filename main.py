@@ -86,13 +86,13 @@ while True:
         for repo in repo_list:
             print(repo)
         
-        usr_command = int(input("What`s your command?\n1- Update repo list\n2- Install packages\n>> "))
+        usr_command = int(input("What`s your command?\n1- Update repo list\n2- Install packages\n0- Exit\n>> "))
 
-        if usr_command == 1:
-            add_repo()
+        if usr_command == 1: add_repo()
+            
+        elif usr_command == 2: install_packages()
 
-        elif usr_command == 2:
-            install_packages()
+        elif usr_command == 0: break
 
         else: print(f"{usr_command} is not a valid command.")
     
