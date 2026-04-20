@@ -2,7 +2,7 @@ The following readme was made with AI because I have no skill creating proper RE
 
 # github-app-updater
 
-A CLI tool to automatically track and install the latest releases of your favorite GitHub projects, designed for Fedora Linux.
+A CLI tool to automatically track and install the latest releases of your favorite GitHub projects, designed for Fedora and Debian based systems.
 
 ## Overview
 
@@ -21,7 +21,6 @@ A CLI tool to automatically track and install the latest releases of your favori
 
 - Python 3.x
 - [`gh` CLI](https://cli.github.com/) installed and authenticated (`gh auth login`)
-- `dnf` package manager (Fedora / RHEL-based distros)
 
 ### Python dependencies
 
