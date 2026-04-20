@@ -13,11 +13,15 @@ info = platform.freedesktop_os_release()
 #global variables
 repo_list = []
 repo_list_name = "repo_list.txt"
+golden_plataform = {
+    "ubuntu": "deb",
+    "debian": "deb",
+    "fedora": "rpm"
+}
 install_commands = {
     "ubuntu": "apt-get",
     "debian": "apt-get",
-    "fedora": "dnf",
-    "arch": "pacman -S"
+    "fedora": "dnf install"
 }
 current_distro = info['ID']
 install_command = install_commands[current_distro]
@@ -71,7 +75,7 @@ def install_packages():
                     package = asset.name
 
             subprocess.run(["/usr/bin/gh", "release", "download", release.tag_name, "--repo", repo_name, "--pattern", package, "--dir", downloads, "--skip-existing"])
-            subprocess.run(["sudo", install_command, "install", f"{downloads}/{package}"])
+            subprocess.run(["sudo", install_command, f"{downloads}/{package}"])
 
         except Exception as e:
             print(f"Error while installing the program from the repo {repo_name}: {e}")
